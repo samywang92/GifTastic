@@ -35,7 +35,7 @@ function renderButtons() {
     renderButtons();
   });
 
-  function displayMovieInfo() {
+  function displayGif() {
     $("#display-gif").empty();
     
 
@@ -74,12 +74,15 @@ function renderButtons() {
       url: queryURL,
       method: "GET"
     }).then(function(response) {
+        var $select //need to select the actual gif that is why its not working then we need to add columns and we gucci
         var gifID = $(this).attr("data-value");
-        var selectGif = $(this).attr("id")
+        var selectGif = $(this).attr("id");
         console.log(response);
         console.log("bambambam");
+        console.log(`id: ${gifID} selectedgif ${selectGif} target: ${$(this)}`);
+        $(`#${selectGif}`).attr("src",response.data[gifID].images.original.url);
     });
   }
 
-  $(document).on("click", ".gif-button", displayMovieInfo);
+  $(document).on("click", ".gif-button", displayGif);
   $(document).on("click", ".gif", animateGif);
